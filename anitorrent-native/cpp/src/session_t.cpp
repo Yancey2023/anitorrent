@@ -97,6 +97,8 @@ static void apply_settings_to_pack(libtorrent::settings_pack &s, const session_s
                true); // this will start dht immediately when the setting is started
     s.set_bool(settings_pack::enable_lsd, true);
 
+    s.set_bool(settings_pack::announce_to_all_tiers, true);
+
     s.set_int(settings_pack::download_rate_limit, settings.download_rate_limit);
     s.set_int(settings_pack::upload_rate_limit, settings.upload_rate_limit);
 
@@ -131,7 +133,7 @@ static void apply_settings_to_pack(libtorrent::settings_pack &s, const session_s
     // seeding
     s.set_int(settings_pack::max_allowed_in_request_queue, 100);
     s.set_int(settings_pack::suggest_mode, settings_pack::suggest_read_cache);
-    // s.set_bool(settings_pack::close_redundant_connections, true);
+    s.set_bool(settings_pack::close_redundant_connections, false);
     START_LOG("Start set dht_bootstrap_nodes_extra");
 
     if (!settings.dht_bootstrap_nodes_extra.empty()) {
